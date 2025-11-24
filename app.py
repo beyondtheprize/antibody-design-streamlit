@@ -3,6 +3,7 @@ import json
 import pandas as pd
 from datetime import datetime
 import re
+import os
 
 # Page configuration
 st.set_page_config(
@@ -71,7 +72,10 @@ st.markdown("""
 def load_papers():
     """Load papers from the papertable file"""
     try:
-        with open('/home/sandbox/antibody-design-streamlit/papers_data.papertable', 'r') as f:
+        # Get the directory where this script is located
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        data_file = os.path.join(script_dir, 'papers_data.papertable')
+        with open(data_file, 'r') as f:
             data = json.load(f)
         return data
     except Exception as e:
